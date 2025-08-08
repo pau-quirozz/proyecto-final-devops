@@ -1,0 +1,43 @@
+name: Deploy with Terraform
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'infra/**'
+      - '.github/workflows/deploy-terraform.yml'
+
+jobs:
+  terraform-deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    defaults:
+      run:
+        working-directory: infra
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::<YOUR_ACCOUNT_ID>:role/<GITHUB_OIDC_ROLE>
+          aws-region: us-east-1
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
