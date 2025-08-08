@@ -70,6 +70,17 @@ cd infra
 terraform init
 terraform apply -auto-approve
 
+4. Ejecución local para desarrollo
+   La aplicación FastAPI puede iniciarse sin requerir un servidor PostgreSQL.
+   Por defecto se utilizará una base de datos SQLite local.
+
+   ```bash
+   cd app
+   uvicorn main:app --reload
+   ```
+
+   Para usar PostgreSQL, define la variable de entorno `DATABASE_URL` con la URL completa del servidor.
+
  Automatización CI/CD
 GitHub Actions:
 - docker-build.yml: Construye y sube imagen Docker a ECR
