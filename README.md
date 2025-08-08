@@ -104,7 +104,7 @@ Durante el desarrollo se utilizó ChatGPT (Codex) para:
 - Documentación
 
  Créditos
-Proyecto realizado por [Tu Nombre]
+Proyecto realizado por Paulina Quiroz
 Rol: DevOps Engineer
-Curso: [Nombre del curso o institución]
+Curso: AWS
 
